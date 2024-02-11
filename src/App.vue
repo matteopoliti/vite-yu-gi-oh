@@ -15,7 +15,17 @@ export default {
             store,
         };
     },
-    created() {
+    mounted() {
+        this.getCard()
+    },
+    methods: {
+        getCard() {
+            axios
+                .get(store.apiUrl)
+                .then(response => {
+                    store.cardList = response.data.data
+                })
+        }
     },
 }
 </script>

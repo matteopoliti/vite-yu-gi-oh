@@ -21,6 +21,8 @@ header {
     figure {
         text-align: center;
         padding: 20px;
+        display: flex;
+        justify-content: center;
 
         img {
             width: 400px;
