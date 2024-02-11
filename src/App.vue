@@ -20,11 +20,16 @@ export default {
     },
     methods: {
         getCard() {
+            store.loading = true
+
             axios
                 .get(store.apiUrl)
                 .then(response => {
                     store.cardList = response.data.data
+                    store.loading = false
+
                 })
+
         }
     },
 }
