@@ -5,14 +5,15 @@
             <div>
                 <label for="type">Choose a archetype:</label>
 
-                <select name="type" id="type">
-                    <option value="Alien">Alien</option>
-                    <option value="Robot">Robot</option>
-                    <option value="Dyno">Dyno</option>
-                    <option value="Fairies">Fairies</option>
+                <select name="type" id="type" v-model="store.archetype" @change="$emit('changeArchetype')">
+                    <option :value="item.archetype_name" v-for="(item, index) in store.arrayArchetype" :key="index">
+                        {{ item.archetype_name }}</option>
                 </select>
             </div>
             <div class="bg_white">
+                <div class="result">
+                    <p>Found {{ store.cardList.length }} cards</p>
+                </div>
                 <div v-if="(store.loading)" class="lds-spinner">
                     <div></div>
                     <div></div>
@@ -27,10 +28,7 @@
                     <div></div>
                     <div></div>
                 </div>
-                <div class="result">
-                    <p>Found {{ store.cardList.length }} cards</p>
-                </div>
-                <div class="row">
+                <div :class="(store.cardList.length > store.cardList.length - 1) ? 'row' : 'd_none'">
                     <CardList v-for="(element, index) in store.cardList" :key="index" :propsElement="element" />
 
                 </div>
@@ -106,6 +104,10 @@ main {
                 display: flex;
                 gap: 20px;
                 flex-wrap: wrap;
+            }
+
+            .d_none {
+                display: none;
             }
 
             .lds-spinner {
